@@ -3,6 +3,7 @@ import torch
 from jaxtyping import Int
 from torch import Tensor
 import timeit
+import sys
 
 
 def benchmark_transformer(vocab_size, context_length, d_model, num_layers, num_heads, d_ff, batch_size=1):
@@ -115,4 +116,5 @@ if __name__ == "__main__":
         print("-" * 50)
     
     print("\nBenchmarking completed!")
+    sys.stdout.flush()
 
