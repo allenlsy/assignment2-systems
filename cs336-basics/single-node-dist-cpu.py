@@ -32,11 +32,12 @@ def dist_demo(rank, group, world_size, data_size_mb):
     # print(f"rank {rank} data (after all-reduce): {data}")
 
 if __name__  == "__main__":
-    for group in ['gloo', 'nccl']:
-        for data_mb in [1, 10, 100, 1000]:
+    # for group in ['gloo', 'nccl']:
+    for group in ['gloo']:
+        for data_mb in [1, 10, 100]:
             for procs in [2, 4, 6]:
                 print(f"bench marking {group} {data_mb}MB procs={procs}")
-                execution_time = timeit.timeit(lambda: [mp.spawn(fn=dist_demo, args=(group, procs, data_mb, ), nprocs=procs, join=True), torch.cuda.synchronize()], number=1)
+                execution_time = timeit.timeit(lambda: [mp.spawn(fn=dist_demo, args=(group, procs, data_mb, ), nprocs=procs, join=True)], number=1)
 
                 print(f"Time taken for mp.spawn: {execution_time:.6f} seconds")
 
