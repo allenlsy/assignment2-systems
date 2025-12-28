@@ -110,8 +110,10 @@ if __name__ == "__main__":
                 d_ff=model_spec["d_ff"],
                 batch_size=batch_size
             )
-        except Exception as e:
+        except BaseException as e:
             print(f"  Error benchmarking {model_name}: {str(e)}")
+            # Also flush the output in case of an error
+            sys.stdout.flush()
         
         print("-" * 50)
     
